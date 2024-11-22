@@ -16,5 +16,8 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Valeur de l'ID générée automatiquement.
     private long id;
     private String name;
-    private 
+    private String pseudonyme;
+    private String email;
+    private int niveau;
+    private int points_totaux;
 }
