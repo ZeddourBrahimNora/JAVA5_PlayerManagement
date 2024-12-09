@@ -20,11 +20,11 @@ public class FriendService {
     public void addFriend(Long playerId, Long friendId) {
         // Récupérer le joueur principal
         Player player = playerRepository.findById(playerId)
-                .orElseThrow(() -> new RuntimeException("Joueur introuvable avec l'ID : " + playerId));
+                .orElseThrow(() -> new RuntimeException("Player not found with ID : : " + playerId));
 
         // Récupérer le joueur à ajouter comme ami
         Player friend = playerRepository.findById(friendId)
-                .orElseThrow(() -> new RuntimeException("Ami introuvable avec l'ID : " + friendId));
+                .orElseThrow(() -> new RuntimeException("Friend not found with ID : : " + friendId));
 
         // Créer la relation d'amitié
         Friend friendship = new Friend();

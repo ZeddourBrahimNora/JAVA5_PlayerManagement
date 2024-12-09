@@ -19,6 +19,6 @@ public class FriendController {
     @PostMapping
     public ResponseEntity<String> addFriend(@PathVariable Long playerId, @RequestBody FriendDTO friendDTO) {
         friendService.addFriend(playerId, friendDTO.getFriendId());
-        return ResponseEntity.ok("Ami ajouté avec succès !");
+        return ResponseEntity.ok("Friend added successfully !");
     }
 }

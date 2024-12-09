@@ -17,12 +17,11 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-génération de l'ID.
     private Long id;
-
     private String name;
     private String pseudonyme;
     private String email;
-    private int niveau;
-    private int pointsTotaux;
+    private int level;
+    private int totalPoints;
 
     // Relation One-to-Many : un joueur peut avoir plusieurs amis
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true) //mappedBy = "player" indique que la relation est gérée par l'attribut player dans l’entité Friend

@@ -7,7 +7,6 @@ import com.example.player_management.Repository.PlayerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -32,11 +31,11 @@ public class PlayerService {
         player.setName(playerDTO.getName());
         player.setPseudonyme(playerDTO.getPseudonyme());
         player.setEmail(playerDTO.getEmail());
-        player.setNiveau(playerDTO.getNiveau());
-        player.setPointsTotaux(playerDTO.getPointsTotaux());
+        player.setLevel(playerDTO.getLevel());
+        player.setTotalPoints(playerDTO.getTotalPoints());
         Player savedPlayer = playerRepository.save(player);
         return new PlayerDTO(savedPlayer.getId(), savedPlayer.getName(), savedPlayer.getPseudonyme(),
-                savedPlayer.getEmail(), savedPlayer.getNiveau(), savedPlayer.getPointsTotaux());
+                savedPlayer.getEmail(), savedPlayer.getLevel(), savedPlayer.getTotalPoints());
     }
 
     // Modifier les informations d'un joueur existant
@@ -46,11 +45,11 @@ public class PlayerService {
         player.setName(playerDTO.getName());
         player.setPseudonyme(playerDTO.getPseudonyme());
         player.setEmail(playerDTO.getEmail());
-        player.setNiveau(playerDTO.getNiveau());
-        player.setPointsTotaux(playerDTO.getPointsTotaux());
+        player.setLevel(playerDTO.getLevel());
+        player.setTotalPoints(playerDTO.getTotalPoints());
         Player updatedPlayer = playerRepository.save(player);
         return new PlayerDTO(updatedPlayer.getId(), updatedPlayer.getName(), updatedPlayer.getPseudonyme(),
-                updatedPlayer.getEmail(), updatedPlayer.getNiveau(), updatedPlayer.getPointsTotaux());
+                updatedPlayer.getEmail(), updatedPlayer.getLevel(), updatedPlayer.getTotalPoints());
     }
 
     // Service : Supprimer un joueur existant de la base de données
@@ -73,6 +72,6 @@ public class PlayerService {
 
         // Retourner un DTO au contrôleur
         return new PlayerDTO(player.getId(), player.getName(), player.getPseudonyme(),
-                player.getEmail(), player.getNiveau(), player.getPointsTotaux(), friendIds);
+                player.getEmail(), player.getLevel(), player.getTotalPoints(), friendIds);
     }
 }

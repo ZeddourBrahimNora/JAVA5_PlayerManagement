@@ -14,18 +14,18 @@ public class PlayerDTO {
     private String name;
     private String pseudonyme;
     private String email;
-    private int niveau;
-    private int pointsTotaux;
+    private int level;
+    private int totalPoints;
     private List<Long> friendIds;
 
-    public PlayerDTO(Long id, String name, String pseudonyme, String email, int niveau, int pointsTotaux) {
+    public PlayerDTO(Long id, String name, String pseudonyme, String email, int level, int totalPoints) {
         this.id = id;
         this.name = name;
         this.pseudonyme = pseudonyme;
         this.email = email;
-        this.niveau = niveau;
-        this.pointsTotaux = pointsTotaux;
-        this.friendIds = null; // Par défaut, aucun ami n'est associé
+        this.level = level;
+        this.totalPoints = totalPoints;
+        this.friendIds = null; // Par défaut aucun ami n'est associé
     }
 }
 
