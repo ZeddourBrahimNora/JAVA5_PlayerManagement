@@ -41,6 +41,7 @@ public class PlayerController {
     // Obtenir le profil et les statistiques d’un joueur
     @GetMapping("/{id}")
     public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Long id) {
-        return ResponseEntity.ok(playerService.getPlayerById(id));
+        PlayerDTO playerDTO = playerService.getPlayerWithFriends(id);
+        return ResponseEntity.ok(playerDTO);
     }
 }
