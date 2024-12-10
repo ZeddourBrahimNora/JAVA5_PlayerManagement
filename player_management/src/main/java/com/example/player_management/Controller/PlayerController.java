@@ -5,6 +5,8 @@ import com.example.player_management.Service.PlayerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/joueurs")
 public class PlayerController {
@@ -13,6 +15,16 @@ public class PlayerController {
     public PlayerController(PlayerService playerService) {
         this.playerService = playerService;
     }
+
+    // Endpoint : GET /joueurs
+    // Récupérer la liste de tous les joueurs
+    // Endpoint : GET /joueurs
+    @GetMapping
+    public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
+        List<PlayerDTO> players = playerService.getAllPlayers();
+        return ResponseEntity.ok(players);
+    }
+
 
     // Endpoint : POST /joueurs
     // Ajouter un nouveau joueur

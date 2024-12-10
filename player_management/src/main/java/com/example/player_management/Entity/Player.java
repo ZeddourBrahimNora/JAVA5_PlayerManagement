@@ -25,5 +25,13 @@ public class Player {
 
     // Relation One-to-Many : un joueur peut avoir plusieurs amis
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true) //mappedBy = "player" indique que la relation est gérée par l'attribut player dans l’entité Friend
+    // Liste des joueurs qui ont ajouté ce joueur en tant qu'ami
     private List<Friend> friends = new ArrayList<>(); // Initialisation pour eviter les NullPointerException.
+
+
+    @OneToMany(mappedBy = "friend", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Friend> friendsWithMe = new ArrayList<>(); // Liste des joueurs qui ont ajouté ce joueur en tant qu'ami
+
+
+
 }

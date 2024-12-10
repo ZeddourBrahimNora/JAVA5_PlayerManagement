@@ -20,6 +20,30 @@ public class PlayerService {
         this.playerDAO = playerDAO;
     }
 
+    // Récupérer tous les joueurs
+    public List<PlayerDTO> getAllPlayers() {
+        // Récupérer tous les joueurs depuis le repository
+        List<Player> players = playerRepository.findAll();
+
+        // Convertir chaque joueur en PlayerDTO avec les IDs de leurs amis
+        return players.stream().map(player -> {
+            List<Long> friendIds = player.getFriends().stream()
+                    .map(friend -> friend.getFriend().getId())
+                    .collect(Collectors.toList());
+
+            return new PlayerDTO(
+                    player.getId(),
+                    player.getName(),
+                    player.getPseudonyme(),
+                    player.getEmail(),
+                    player.getLevel(),
+                    player.getTotalPoints(),
+                    friendIds
+            );
+        }).collect(Collectors.toList());
+    }
+
+
     // Créer un joueur
     public PlayerDTO createPlayer(PlayerDTO playerDTO) {
         // Vérifier si l'utilisateur n'existe pas déjà
@@ -27,12 +51,14 @@ public class PlayerService {
         if (exists) {
             throw new RuntimeException("Player with this email or pseudonyme already exists");
         }
+        // crée le nvx joueur
         Player player = new Player();
         player.setName(playerDTO.getName());
         player.setPseudonyme(playerDTO.getPseudonyme());
         player.setEmail(playerDTO.getEmail());
         player.setLevel(playerDTO.getLevel());
         player.setTotalPoints(playerDTO.getTotalPoints());
+        //sauvegarder le joueur
         Player savedPlayer = playerRepository.save(player);
         return new PlayerDTO(savedPlayer.getId(), savedPlayer.getName(), savedPlayer.getPseudonyme(),
                 savedPlayer.getEmail(), savedPlayer.getLevel(), savedPlayer.getTotalPoints());
@@ -63,7 +89,7 @@ public class PlayerService {
     // Récupérer un joueur par ID
     // Logique métier : récupérer un joueur avec ses amis et le convertir en DTO
     public PlayerDTO getPlayerWithFriends(Long id) {
-        Player player = playerDAO.findPlayerWithFriends(id); // Appel au DAO
+        Player player = playerDAO.findPlayerWithFriends(id); // Appel au DAO pour afficher les amis
 
         // Transformation des amis en une liste d'IDs
         List<Long> friendIds = player.getFriends().stream()
